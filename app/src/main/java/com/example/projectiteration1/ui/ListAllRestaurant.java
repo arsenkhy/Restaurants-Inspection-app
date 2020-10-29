@@ -1,12 +1,8 @@
 package com.example.projectiteration1.ui;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,7 +19,7 @@ public class ListAllRestaurant extends AppCompatActivity {
     /*
         TODO
         Change to use Datatype/Class used to hold restaurant datalist
-     */
+    */
     private ArrayList<Integer> resList;
 
     @Override
@@ -33,7 +29,7 @@ public class ListAllRestaurant extends AppCompatActivity {
         /*
             TODO
             Needs Singleton class for list of data
-         */
+        */
         //resList
 
         setUpList();
@@ -56,7 +52,7 @@ public class ListAllRestaurant extends AppCompatActivity {
                 /*
                     TODO
                     Switch to Single Restaurant View
-                 */
+                */
             }
         });
     }

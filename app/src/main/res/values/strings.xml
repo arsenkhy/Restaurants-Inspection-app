@@ -2,7 +2,8 @@
     <string name="app_name">ProjectIteration1</string>
 
     <string name="restaurantName">Name of Restaurant</string>
-    <string name="restaurantIconDesc">Description of Icon</string>
-    <string name="restaurantIssueFound">Issues Found</string>
+    <string name="restaurantIconDesc">Description of Restaurant Icon</string>
+    <string name="restaurantIssueFound">Number of Issues Found</string>
     <string name="restaurantIssueDate">Date of Issue</string>
+    <string name="restaurantHazardIconDesc">Description of Hazard Icon</string>
 </resources>

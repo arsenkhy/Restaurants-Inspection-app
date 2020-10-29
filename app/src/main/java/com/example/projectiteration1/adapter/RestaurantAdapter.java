@@ -1,5 +1,6 @@
 package com.example.projectiteration1.adapter;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.projectiteration1.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder>{
     /*
@@ -41,13 +44,68 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //resList.get(position);
+
+        //Image
         int imageID = 0;
         holder.resImage.setImageResource(imageID);
+
+        //Name
         String name = "";
         holder.resName.setText(name);
-        String issues = "";
-        holder.resIssueFound.setText(issues);
+
+        /*
+            TODO
+            Get Data from Restaurant
+         */
+        int critIssue = 0;
+        int nonCritIssue = 0;
+
+        String issues = "Critical: " + critIssue + " Non-Critical: " + nonCritIssue;
         String date = "";
+        /*
+            TODO
+            Get Inspection date from Restaurant
+         */
+        long inspectionDate = Calendar.getInstance().getTimeInMillis();
+        long currDate = Calendar.getInstance().getTimeInMillis();
+        // Days = Milliseconds / (Hours in Days * Minutes in Hour * Seconds in Minute * Seconds in Milliseconds)
+        float daysPast = (float)(currDate - inspectionDate) / (24 * 60 * 60 * 1000);
+        if(daysPast <= 30){
+            date = daysPast + " days since inspection";
+        }
+        else if(daysPast <= 365){
+            //Month - Day
+            date = inspectionDate + "" + inspectionDate;
+        }
+        else{
+            //Month - Year
+            date = inspectionDate + "" + inspectionDate;
+        }
+
+        /*
+            TODO
+            Get Hazard Rating from Restaurant Data
+         */
+        int hazardRating = 0;
+        switch(hazardRating){
+            case 0: // Low
+                holder.resHazIcon.setImageResource(R.drawable.ic_checkmark);
+                holder.resIssueFound.setTextColor(Color.GREEN);
+                break;
+            case 1: // Medium
+                holder.resHazIcon.setImageResource(R.drawable.ic_warning);
+                holder.resIssueFound.setTextColor(Color.YELLOW);
+                break;
+            default: // High
+                holder.resHazIcon.setImageResource(R.drawable.ic_biohazard);
+                holder.resIssueFound.setTextColor(Color.RED);
+                break;
+        }
+
+        //Issues
+        holder.resIssueFound.setText(issues);
+
+        //Date
         holder.resIssueDate.setText(date);
     }
 
@@ -62,6 +120,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         public ImageView resImage;
+        public ImageView resHazIcon;
         public TextView resName;
         public TextView resIssueFound;
         public TextView resIssueDate;
@@ -72,6 +131,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             resName = itemView.findViewById(R.id.restaurantName);
             resIssueFound = itemView.findViewById(R.id.restaurantIssueFound);
             resIssueDate = itemView.findViewById(R.id.restaurantIssueDate);
+            resHazIcon = itemView.findViewById(R.id.restaurantHazardIcon);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
