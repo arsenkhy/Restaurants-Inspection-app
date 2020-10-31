@@ -28,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Read restaurant data from csv.
         readRestaurantData();
+
+        // Sort the restaurants in alphabetical order
+        restaurantList.sortByName();
     }
 
     // Used course tutorial at: https://www.youtube.com/watch?v=i-TqNzUryn8
@@ -43,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
             // Step over a header
             reader.readLine();
             while ( (eachLine = reader.readLine()) != null) {
-
                 // Split ','
                 String[] information = eachLine.split(",");
 
