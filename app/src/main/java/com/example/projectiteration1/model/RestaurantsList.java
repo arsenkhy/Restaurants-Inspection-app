@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+/**
+ * RestaurantList singleton class models the information
+ * about a list of restaurants that can be shared between
+ * activities. Data includes arrayList of Restaurant objects,
+ * It supports adding new restaurant and sorting restaurants
+ * in alphabetical order.
+ */
 public class RestaurantsList {
     private ArrayList<Restaurant> restaurants = new ArrayList<>();
 

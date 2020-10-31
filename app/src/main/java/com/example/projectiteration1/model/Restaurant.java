@@ -1,9 +1,15 @@
 package com.example.projectiteration1.model;
 
+/**
+ * Restaurant class models the information about a
+ * single restaurant. Data includes tracking number,
+ * restaurant name, address, city, facility type, and
+ * GPS coordinates.
+ */
 public class Restaurant {
     private String trackingNumber;
     private String resName;
-    private String adress;
+    private String address;
     private String city;
     private String facType;
     private String latitude;
@@ -25,12 +31,12 @@ public class Restaurant {
         this.resName = resName;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String adress) {
+        this.address = adress;
     }
 
     public String getCity() {
@@ -71,7 +77,7 @@ public class Restaurant {
         return "Restaurant{" +
                 "trackingNumber='" + trackingNumber + '\'' +
                 ", resName='" + resName + '\'' +
-                ", adress='" + adress + '\'' +
+                ", adress='" + address + '\'' +
                 ", city='" + city + '\'' +
                 ", facType='" + facType + '\'' +
                 ", latitude='" + latitude + '\'' +
