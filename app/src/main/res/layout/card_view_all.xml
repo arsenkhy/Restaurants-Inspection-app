@@ -57,10 +57,10 @@
         android:id="@+id/restaurantHazardIcon"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:contentDescription="@string/restaurantHazardIconDesc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/restaurantName"
         app:layout_constraintTop_toBottomOf="@+id/restaurantName"
-        app:srcCompat="@drawable/ic_launcher_background"
-        android:contentDescription="@string/restaurantHazardIconDesc" />
+        app:srcCompat="@drawable/ic_launcher_background" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

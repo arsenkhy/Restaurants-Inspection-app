@@ -21,7 +21,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         TODO
         Change to use Datatype/Class used to hold restaurant datalist
      */
-    private ArrayList<Integer> resList;
+    private RestaurantsList resList;
     private OnResClickListener myListener;
     /*
         TODO
@@ -32,6 +32,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             TODO
             Needs to grab Singleton class of List to import Data
          */
+        reList = RestaurantList.getInstance();
     }
 
     @NonNull
@@ -43,22 +44,33 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //resList.get(position);
+        Restaurant res;
+        InspectionReport report;
+        if(resList != null){
+            try{
+                res = resList.getRestaurants().get(position);
+                report = res.getInspect();
+            }
+            catch(Exception e){
+
+            }
+        }
 
         //Image
-        int imageID = 0;
+        int imageID = R.drawable.ic_dish;
         holder.resImage.setImageResource(imageID);
 
         //Name
-        String name = "";
+        String name = res.getResName();
         holder.resName.setText(name);
 
         /*
             TODO
             Get Data from Restaurant
          */
-        int critIssue = 0;
-        int nonCritIssue = 0;
+
+        int critIssue = report.getNumCritical();
+        int nonCritIssue = report.getNumNonCritical();
 
         String issues = "Critical: " + critIssue + " Non-Critical: " + nonCritIssue;
         String date = "";
@@ -86,13 +98,13 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             TODO
             Get Hazard Rating from Restaurant Data
          */
-        int hazardRating = 0;
+        String hazardRating = report.getHazardRating().toUpperCase();
         switch(hazardRating){
-            case 0: // Low
+            case "LOW": // Low
                 holder.resHazIcon.setImageResource(R.drawable.ic_checkmark);
                 holder.resIssueFound.setTextColor(Color.GREEN);
                 break;
-            case 1: // Medium
+            case "MEDIUM": // Medium
                 holder.resHazIcon.setImageResource(R.drawable.ic_warning);
                 holder.resIssueFound.setTextColor(Color.YELLOW);
                 break;
@@ -115,7 +127,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             TODO
             Requires Singleton class holding the Restaurant Data
          */
-        return resList.size();
+        return resList.getRestaurants().size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -138,7 +150,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                 public void onClick(View view) {
                     if (myListener != null) {
                         int pos = getAdapterPosition();
-                        if(pos >= 0 && pos < resList.size()){
+                        if(pos >= 0 && pos < resList.getRestaurants().size()){
                             myListener.onResClick(pos);
                         }
                     }
