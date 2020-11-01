@@ -6,6 +6,13 @@ public class Violation {
     String description;
     String reappearance;
 
+    public Violation(int violationID, String seriousness, String description, String reappearance) {
+        this.violationID = violationID;
+        this.seriousness = seriousness;
+        this.description = description;
+        this.reappearance = reappearance;
+    }
+
     public int getViolationID() {
         return violationID;
     }

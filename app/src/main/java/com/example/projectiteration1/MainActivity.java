@@ -155,13 +155,41 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<Violation> getViolations (String[] violationsLine, int startIndex) {
         ArrayList<Violation> toReturn = new ArrayList<>();
+        // Line of all violations
         StringBuffer allViolations = new StringBuffer();
         for (int i = startIndex; i < violationsLine.length; i++) {
             allViolations.append(violationsLine[i]).append(",");
         }
-        String str = allViolations.toString();
-        System.out.println(str);
+        String lineOfViolations = allViolations.toString();         // Get String
 
+        // The strings of all violations in the line
+        ArrayList<String> violationList = new ArrayList<>();
+
+        // The indexes for reading the list of all violations in a line
+        int start = 0;
+        int end = 0;
+        // Until read all line
+        while (end < lineOfViolations.length()) {
+            // New violation started
+            if (lineOfViolations.charAt(end) == '|') {
+                violationList.add(lineOfViolations.substring(start + 1, end));
+                start = end;
+            } else if (end == lineOfViolations.length() - 2) {                  // Last violation in the line
+                violationList.add(lineOfViolations.substring(start + 1, end));
+            }
+            end++;
+        }
+
+        // Set all violations into one report
+        for (String singleViolation : violationList) {
+            String[] attributes = singleViolation.split(",");       // Attributes of one violation
+            Violation violation = new Violation(
+                    Integer.parseInt(attributes[0]),                      // Violation ID
+                    attributes[1],                                        // Seriousness
+                    attributes[2],                                        // Description
+                    attributes[3]);                                       // Reappearance
+            toReturn.add(violation);
+        }
 
         return toReturn;
     }
