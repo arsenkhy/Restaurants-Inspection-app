@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * ReportList singleton class models the information
- * about a list of inspection report that can be shared between
+ * about a list of inspection reports that can be shared between
  * activities. Data includes arrayList of InspectionReport
  * objects. It supports adding new InspectionReport to the list.
  */

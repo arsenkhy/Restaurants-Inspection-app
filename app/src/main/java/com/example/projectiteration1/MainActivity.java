@@ -28,20 +28,47 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Get singleton class of reports
+        reportsList = ReportsList.getInstance();
+
+        // Read reports data from csv.
+        readReportsData();
+
         // Get singleton class of restaurants
         restaurantList = RestaurantsList.getInstance();
 
         // Read restaurant data from csv.
         readRestaurantData();
 
+        // Assign reports to a restaurant
+        assignInspectionReportsToRes();
+
         // Sort the restaurants in alphabetical order
         restaurantList.sortByName();
 
-        // Get singleton class of reports
-        reportsList = ReportsList.getInstance();
+    }
 
-        // Read reports data from csv.
-        readReportsData();
+    private void assignInspectionReportsToRes() {
+        // Inspection Reports for a single restaurant
+        ArrayList<InspectionReport> oneRestaurantReports = new ArrayList<>();
+
+        for (Restaurant restaurant : restaurantList.getRestaurants()) {
+            for (InspectionReport report : reportsList.getReports()) {
+                // Check corresponding tracking numbers
+                if (restaurant.getTrackingNumber().equals(report.getTrackingNumber())) {
+                    oneRestaurantReports.add(report);
+                }
+            }
+            // Set the reports to a restaurant
+            restaurant.setInspectionReports(oneRestaurantReports);
+            oneRestaurantReports = new ArrayList<>();               // Clean up space for new iteration
+
+            // For Debugging purposes
+            Log.d("MainActivity", "Assigned Reports to "
+                    + restaurant.getResName() + ": "
+                    + restaurant.getInspectionReports());
+        }
+
     }
 
     // Used course tutorial at: https://www.youtube.com/watch?v=i-TqNzUryn8
@@ -89,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                 restaurantList.add(restaurant);
 
                 // Display the restaurants for debugging
-                Log.d("MyActivty", "Just created: " + restaurant);
+                Log.d("MyActivty", "Just created: " + restaurant);          // Will not show list of reports yet, Assigned later in program
             }
         } catch (IOException e) {
             // Error reading internal file

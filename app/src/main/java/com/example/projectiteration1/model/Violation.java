@@ -1,10 +1,17 @@
 package com.example.projectiteration1.model;
 
+/**
+ * Violation class models the information about a
+ * single violation inside of the inspection report.
+ * Data includes violationID, seriousness, description,
+ * and reappearance.
+ */
 public class Violation {
-    int violationID;
-    String seriousness;
-    String description;
-    String reappearance;
+    // Read from a csv
+    private int violationID;
+    private String seriousness;
+    private String description;
+    private String reappearance;
 
     public Violation(int violationID, String seriousness, String description, String reappearance) {
         this.violationID = violationID;

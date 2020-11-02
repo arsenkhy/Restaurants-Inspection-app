@@ -9,13 +9,14 @@ import java.util.ArrayList;
  * issues, hazard rating, and violations.
  */
 public class InspectionReport {
-    String trackingNumber;
-    String inspectionDate;
-    String inspectionType;
-    int numCritical;
-    int numNonCritical;
-    String hazardRating;
-    ArrayList <Violation> violations = new ArrayList<>();
+    // Read from a csv
+    private String trackingNumber;
+    private String inspectionDate;
+    private String inspectionType;
+    private int numCritical;
+    private int numNonCritical;
+    private String hazardRating;
+    private ArrayList <Violation> violations = new ArrayList<>();
 
     public String getTrackingNumber() {
         return trackingNumber;
