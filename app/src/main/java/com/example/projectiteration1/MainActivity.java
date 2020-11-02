@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.projectiteration1.model.InspectionReport;
-import com.example.projectiteration1.model.ReportsList;
 import com.example.projectiteration1.model.Restaurant;
 import com.example.projectiteration1.model.RestaurantsList;
 import com.example.projectiteration1.model.Violation;
@@ -20,16 +19,13 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RestaurantsList restaurantList;
-    private ReportsList reportsList;
+    private RestaurantsList restaurantList;                                 // List of restaurants
+    private ArrayList<InspectionReport> reportsList = new ArrayList<>();    // List of reports. Read from csv
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // Get singleton class of reports
-        reportsList = ReportsList.getInstance();
 
         // Read reports data from csv.
         readReportsData();
@@ -45,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Sort the restaurants in alphabetical order
         restaurantList.sortByName();
-
     }
 
     private void assignInspectionReportsToRes() {
@@ -53,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<InspectionReport> oneRestaurantReports = new ArrayList<>();
 
         for (Restaurant restaurant : restaurantList.getRestaurants()) {
-            for (InspectionReport report : reportsList.getReports()) {
+            for (InspectionReport report : reportsList) {
                 // Check corresponding tracking numbers
                 if (restaurant.getTrackingNumber().equals(report.getTrackingNumber())) {
                     oneRestaurantReports.add(report);
@@ -87,11 +82,13 @@ public class MainActivity extends AppCompatActivity {
                 // Split ','
                 String[] information = eachLine.split(",");
 
-                // Set default value for empty strings
                 int index = 0;
                 for (String s : information) {
+                    // Set default data
                     if (s.length() == 0) {
                         information[index] = NO_DATA;
+                    } else { // Remove unnecessary character '"' from string
+                        information[index] = removeQuotationMark(information[index]);
                     }
                     index++;
                 }
@@ -141,11 +138,18 @@ public class MainActivity extends AppCompatActivity {
                 // Split ','
                 String[] information = eachLine.split(",");
 
-                // Set default value for empty strings
                 int index = 0;
                 for (String s : information) {
+                    // The string index where line of violations starts
+                    if (index == 6) {
+                        break;
+                    }
+                    // Set default value for empty strings
                     if (s.length() == 0) {
                         information[index] = NO_DATA;
+                    } else {
+                        // Remove unnecessary character '"' from string
+                        information[index] = removeQuotationMark(information[index]);
                     }
                     index++;
                 }
@@ -171,13 +175,23 @@ public class MainActivity extends AppCompatActivity {
                 reportsList.add(report);
 
                 // Display the restaurants for debugging
-                Log.d("MyActivty", "Just created: " + report);
+                Log.d("MyActivity", "Just created: " + report);
             }
         } catch (IOException e) {
             // Error reading internal file
             Log.wtf("MainActivity", "Error reading the file" + eachLine, e);
             e.printStackTrace();
         }
+    }
+
+    // When reading strings it leaves "" marks on a string attributes
+    private String removeQuotationMark(String beforeString) {
+        char quotation = 34;                        // Stands for '"'
+        String s = String.valueOf(quotation);
+
+        // Delete all '"'
+        String afterString = beforeString.replace(s,"");
+        return afterString;
     }
 
     private ArrayList<Violation> getViolations (String[] violationsLine, int startIndex) {
@@ -220,5 +234,4 @@ public class MainActivity extends AppCompatActivity {
 
         return toReturn;
     }
-
 }

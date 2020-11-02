@@ -87,7 +87,6 @@ public class Restaurant {
     }
 
     // For debugging purposes
-
     @Override
     public String toString() {
         return "Restaurant{" +
