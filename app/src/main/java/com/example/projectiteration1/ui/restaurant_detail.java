@@ -16,9 +16,12 @@ import com.example.projectiteration1.model.InspectionReport;
 import com.example.projectiteration1.model.Restaurant;
 import com.example.projectiteration1.model.RestaurantsList;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 public class restaurant_detail extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
     private RestaurantsList res_list;
     private Restaurant res;
     private int index;
@@ -38,13 +41,13 @@ public class restaurant_detail extends AppCompatActivity {
     //intent
     public static Intent makeLaunchIntent(Context context, int index) {
         Intent intent=new Intent(context, restaurant_detail.class);
-        intent.putExtra("Restaurant Index ", index);
+        intent.putExtra(Intent.EXTRA_INDEX, index);
         return intent;
     }
 
     private void extractData(){
         Intent intent=getIntent();
-        index=intent.getIntExtra("Restaurant Index", 0);
+        index=intent.getIntExtra(Intent.EXTRA_INDEX, 0);
     }
 
     @SuppressLint("SetTextI18n")
@@ -65,13 +68,26 @@ public class restaurant_detail extends AppCompatActivity {
         String res_lat = res.getLatitude();
         String res_long = res.getLongitude();
         gps.setText(res_lat + " latitude \n" + res_long + " longitude");
-
     }
 
+    @SuppressLint("SetTextI18n")
     private void inspectionList() {
-        recyclerView = findViewById(R.id.inspection_list);
+        RecyclerView recyclerView = findViewById(R.id.inspection_list);
         recyclerView.setHasFixedSize(true);
-        InspectionReport report = res.getInspectionReports().get(index);
+        ArrayList<InspectionReport> report = res.getInspectionReports();
+        //sort the inspection report
+        Collections.sort(report, new Comparator<InspectionReport>() {
+            @Override
+            public int compare(InspectionReport o1, InspectionReport o2) {
+                return o2.getInspectionDate().compareTo(o1.getInspectionDate());
+            }
+        });
+        //set text if inspection report is empty
+        if(report.size()==0)
+        {
+            TextView t = findViewById(R.id.text);
+            t.setText("No Inspections Yet");
+        }
         InspectionAdapter adapter = new InspectionAdapter(this, report, index);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

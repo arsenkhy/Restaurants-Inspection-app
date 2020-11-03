@@ -3,6 +3,7 @@ package com.example.projectiteration1.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.icu.util.LocaleData;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,17 +25,18 @@ import org.w3c.dom.Text;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 
 //adapter class to display inspection
 public class InspectionAdapter extends RecyclerView.Adapter<InspectionAdapter.MyViewHolder> {
     RestaurantsList res_list = RestaurantsList.getInstance();
     Context context;
-    InspectionReport list;
+    ArrayList<InspectionReport> list;
     int position;
-    int size;
+    Restaurant res = res_list.getRestaurants().get(position);
 
     //constructor
-    public InspectionAdapter(Context c, InspectionReport inspectionList, int index)
+    public InspectionAdapter(Context c, ArrayList<InspectionReport> inspectionList, int index)
     {
         context = c;
         list = inspectionList;
@@ -52,27 +54,26 @@ public class InspectionAdapter extends RecyclerView.Adapter<InspectionAdapter.My
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
-        Restaurant res = res_list.getRestaurants().get(position);
-        size = res.getInspectionReports().size();
-        if(list == null){
-            list = new InspectionReport();
-            list.setHazardRating("LOW");
-            list.setInspectionDate("11111111");
-            list.setNumCritical(0);
-            list.setNumNonCritical(0);
+        if(list.size()==0)
+        {
+            InspectionReport report = new InspectionReport();
+            report.setHazardRating("Low");
+            report.setInspectionDate("11111111");
+            report.setNumCritical(0);
+            report.setNumNonCritical(0);
         }
 
         //hazard
-        holder.hazard.setText("Hazard Level : " + list.getHazardRating());
+        holder.hazard.setText("Hazard Level : " + list.get(position).getHazardRating());
 
         //critical issue
-        holder.critical.setText("No. of critical issues : " + list.getNumCritical());
+        holder.critical.setText("Critical: " + list.get(position).getNumCritical());
 
         //non-critical issues
-        holder.nonCritical.setText("No. of non-critical issues : " + list.getNumNonCritical());
+        holder.nonCritical.setText("Non-critical: " + list.get(position).getNumNonCritical());
 
         //date
-        String dateString = list.getInspectionDate();
+        String dateString = list.get(position).getInspectionDate();
         int year = Integer.parseInt(dateString.substring(0,4));
         int month = Integer.parseInt(dateString.substring(4,6));
         int day = Integer.parseInt(dateString.substring(6,8));
@@ -102,25 +103,18 @@ public class InspectionAdapter extends RecyclerView.Adapter<InspectionAdapter.My
         holder.date.setText(textViewDate);
 
         //image
-        if(list.getHazardRating().equals("LOW")) {
+        if(list.get(position).getHazardRating().equals("Low")) {
             holder.risk.setImageResource(R.drawable.risk_low);
+            holder.hazard.setTextColor(Color.parseColor("#4CBB17"));
         }
-        else if(list.getHazardRating().equals("MODERATE")){
+        else if(list.get(position).getHazardRating().equals("Moderate")){
             holder.risk.setImageResource(R.drawable.risk_medium);
+            holder.hazard.setTextColor(Color.parseColor("#FF7800"));
         }
         else{
             holder.risk.setImageResource(R.drawable.risk_high);
+            holder.hazard.setTextColor(Color.parseColor("#E60000"));
         }
-
-        holder.inspection_layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*Intent intent = new Intent(context, DetailInspection.class);
-                intent.putExtra("index", position);
-                String chooseInspection = intent.getStringExtra("Inspection Date" + res.getInspectionReports().get(position).getInspectionDate());
-                context.startActivity(intent);*/
-            }
-        });
     }
 
     private String getMonth(int month){
@@ -143,7 +137,7 @@ public class InspectionAdapter extends RecyclerView.Adapter<InspectionAdapter.My
 
     @Override
     public int getItemCount() {
-        return size;
+        return list.size();
     }
 
     /*public static Intent makeLaunchIntent(Context c, int index){
@@ -162,7 +156,17 @@ public class InspectionAdapter extends RecyclerView.Adapter<InspectionAdapter.My
             critical = itemView.findViewById(R.id.critical);
             nonCritical = itemView.findViewById(R.id.nonCritical);
             risk = itemView.findViewById(R.id.RiskImage);
-            inspection_layout=itemView.findViewById(R.id.inspection_layout);
+            inspection_layout = itemView.findViewById(R.id.inspection_layout);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    /*Intent intent = new Intent(context, DetailInspection.class);
+                    intent.putExtra("index", position);
+                    String chooseInspection = intent.getStringExtra("Inspection Date" + res.getInspectionReports().get(position).getInspectionDate());
+                    context.startActivity(intent);*/
+                }
+            });
         }
     }
 }
