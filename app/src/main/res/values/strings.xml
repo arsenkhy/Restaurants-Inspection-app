@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ProjectIteration1</string>
+    <string name="app_name">Restaurant Detail</string>
 
     <string name="restaurantName">Name of Restaurant</string>
     <string name="restaurantIconDesc">Description of Restaurant Icon</string>
