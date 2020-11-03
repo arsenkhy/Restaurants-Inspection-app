@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.restaurant_detail"></activity>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,6 +20,11 @@
         <activity
             android:name=".ui.ListAllRestaurant"
             android:label="List of Restaurants"
+            >
+        </activity>
+        <activity
+            android:name=".ui.RestaurantDetail"
+            android:label="Restaurant Details"
             >
         </activity>
     </application>

@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class restaurant_detail extends AppCompatActivity {
+public class RestaurantDetail extends AppCompatActivity {
 
     private RestaurantsList res_list;
     private Restaurant res;
@@ -40,7 +40,7 @@ public class restaurant_detail extends AppCompatActivity {
 
     //intent
     public static Intent makeLaunchIntent(Context context, int index) {
-        Intent intent=new Intent(context, restaurant_detail.class);
+        Intent intent=new Intent(context, RestaurantDetail.class);
         intent.putExtra(Intent.EXTRA_INDEX, index);
         return intent;
     }

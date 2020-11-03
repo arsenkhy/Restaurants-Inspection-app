@@ -7,5 +7,14 @@
     <string name="restaurantIssueDate">Date of Issue</string>
     <string name="restaurantHazardIconDesc">Description of Hazard Icon</string>
     <string name="restaurantLocation">Location of Restaurant</string>
-    <string name="textview">TextView</string>
+    <string name="detailedName">Name of Restaurant</string>
+    <string name="detailedAddress">Address of Restaurant</string>
+    <string name="detailedGPS">GPS Location of Restaurant</string>
+    <string name="inspection_report">Inspection Report</string>
+    <string name="detailIconDesc">Small Image of Restaurant</string>
+    <string name="detailBigIconDesc">Large Image of Restaurant</string>
+    <string name="inspectionNonCrit">Number of Non Critical Issues</string>
+    <string name="inspectionCrit">Number of Non Critical Issues</string>
+    <string name="inspectionDate">Date of Inspection</string>
+    <string name="inspectionHazardLevel">Hazard Level</string>
 </resources>

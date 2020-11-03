@@ -27,8 +27,7 @@ public class ListAllRestaurant extends AppCompatActivity {
     private RestaurantsList resList;
 
     public static Intent makeLaunchIntent(Context c) {
-        Intent intent = new Intent(c, ListAllRestaurant.class);
-        return intent;
+        return new Intent(c, ListAllRestaurant.class);
     }
 
     @Override
@@ -54,7 +53,7 @@ public class ListAllRestaurant extends AppCompatActivity {
             @Override
             public void onResClick(int pos) {
                 Log.i("Main - Res Click", "@Pos: " + pos);
-                Intent i = restaurant_detail.makeLaunchIntent(ListAllRestaurant.this, pos);
+                Intent i = RestaurantDetail.makeLaunchIntent(ListAllRestaurant.this, pos);
                 startActivity(i);
             }
         });

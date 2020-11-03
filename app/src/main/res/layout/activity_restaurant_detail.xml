@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.restaurant_detail">
+    tools:context=".ui.RestaurantDetail">
 
 
     <TextView
@@ -12,19 +12,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="160dp"
-        android:text="@string/textview"
+        android:text="@string/detailedName"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.323"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/detailIcon"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/textview"
+        android:text="@string/detailedAddress"
         android:textColor="#000000"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +36,7 @@
         android:id="@+id/gps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/textview"
+        android:text="@string/detailedGPS"
         android:textColor="#000000"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,9 +55,10 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/detailBigIcon"
         android:layout_width="411dp"
         android:layout_height="161dp"
+        android:contentDescription="@string/detailBigIconDesc"
         android:src="@drawable/restaurant"
         app:layout_constraintBottom_toBottomOf="@+id/inspection_list"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,22 +67,23 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/detailIcon"
         android:layout_width="91dp"
         android:layout_height="92dp"
+        android:contentDescription="@string/detailIconDesc"
         android:src="@drawable/ic_dish"
         app:layout_constraintBottom_toTopOf="@+id/inspection_list"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.053"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/detailBigIcon"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Inspection Report"
+        android:text="@string/inspection_report"
         android:textColor="#009688"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -89,7 +91,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.337"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/detailIcon"
         app:layout_constraintVertical_bias="0.705" />
 
     <com.airbnb.lottie.LottieAnimationView
@@ -99,7 +101,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.045"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/detailIcon"
         app:layout_constraintVertical_bias="0.913"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
