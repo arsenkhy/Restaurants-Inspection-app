@@ -36,10 +36,6 @@ public class RestaurantsList {
         restaurants.add(restaurant);
     }
 
-    public Restaurant getRestaurant(int i) {
-        return restaurants.get(i);
-    }
-
     public void sortByName() {
         // Comparator for the Restaurant object
         Collections.sort(restaurants, new Comparator<Restaurant>() {
