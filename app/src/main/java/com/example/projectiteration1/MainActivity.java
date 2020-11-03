@@ -10,6 +10,7 @@ import com.example.projectiteration1.model.InspectionReport;
 import com.example.projectiteration1.model.Restaurant;
 import com.example.projectiteration1.model.RestaurantsList;
 import com.example.projectiteration1.model.Violation;
+import com.example.projectiteration1.ui.ListAllRestaurant;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -42,6 +43,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Sort the restaurants in alphabetical order
         restaurantList.sortByName();
+
+        // Launch into Listing all restaurants UI
+        Intent i = ListAllRestaurant.makeLaunchIntent(MainActivity.this);
+        startActivity(i);
     }
 
     private void assignInspectionReportsToRes() {
