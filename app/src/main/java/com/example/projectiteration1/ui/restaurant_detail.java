@@ -1,6 +1,7 @@
-package com.example.projectiteration1;
+package com.example.projectiteration1.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
@@ -9,6 +10,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.projectiteration1.R;
+import com.example.projectiteration1.adapter.InspectionAdapter;
 import com.example.projectiteration1.model.InspectionReport;
 import com.example.projectiteration1.model.Restaurant;
 import com.example.projectiteration1.model.RestaurantsList;
@@ -26,7 +29,6 @@ public class restaurant_detail extends AppCompatActivity {
         setContentView(R.layout.activity_restaurant_detail);
 
         res_list = RestaurantsList.getInstance();
-        res = res_list.getRestaurants().get(index);
 
         extractData();
         restaurantDetails();
@@ -47,7 +49,7 @@ public class restaurant_detail extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void restaurantDetails() {
-
+        res = res_list.getRestaurants().get(index);
         //set Name of restaurant
         TextView name = findViewById(R.id.name);
         String res_name = res.getResName();
@@ -62,15 +64,17 @@ public class restaurant_detail extends AppCompatActivity {
         TextView gps = findViewById(R.id.gps);
         String res_lat = res.getLatitude();
         String res_long = res.getLongitude();
-        gps.setText(res_lat + "latitude\n" + res_long + "longitude");
+        gps.setText(res_lat + " latitude \n" + res_long + " longitude");
 
-        //set image of restaurant
     }
 
     private void inspectionList() {
         recyclerView = findViewById(R.id.inspection_list);
+        recyclerView.setHasFixedSize(true);
         InspectionReport report = res.getInspectionReports().get(index);
-
+        InspectionAdapter adapter = new InspectionAdapter(this, report, index);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
 }
