@@ -1,6 +1,7 @@
 package com.example.projectiteration1.adapter;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,28 +12,22 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projectiteration1.R;
+import com.example.projectiteration1.model.InspectionReport;
+import com.example.projectiteration1.model.Restaurant;
+import com.example.projectiteration1.model.RestaurantsList;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
+/**
+ * Adapter to fit data of the restaurant into a
+ */
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder>{
-    /*
-        TODO
-        Change to use Datatype/Class used to hold restaurant datalist
-     */
     private RestaurantsList resList;
     private OnResClickListener myListener;
-    /*
-        TODO
-        Needs Singleton class for list of data
-     */
+
     public RestaurantAdapter(){
-        /*
-            TODO
-            Needs to grab Singleton class of List to import Data
-         */
-        reList = RestaurantList.getInstance();
+        resList = RestaurantsList.getInstance();
     }
 
     @NonNull
@@ -44,16 +39,36 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Restaurant res;
-        InspectionReport report;
+        Restaurant res = null;
+        InspectionReport report = null;
         if(resList != null){
             try{
-                res = resList.getRestaurants().get(position);
-                report = res.getInspect();
-            }
-            catch(Exception e){
+                try{
+                    res = resList.getRestaurants().get(position);
+                    Log.i("Listing - Restaurant", "pos: " + position + " " + res.toString());
+                }catch(Exception e){
+                    Log.e("Adapter - onBind", "Error trying to access Restaurant");
+                }
+
+                try{
+                    report = res.getInspectionReports().get(0);
+                    Log.i("Listing - Report", "pos: " + position + " " + report.toString());
+                }catch(Exception e){
+                    Log.e("Adapter - onBind", "Error trying to access Inspection");
+                }
 
             }
+            catch(Exception e){
+                Log.e("Adapter - onBind", "Error trying to access Restaurant / Inspection");
+            }
+        }
+
+        if(report == null){
+            report = new InspectionReport();
+            report.setHazardRating("LOW");
+            report.setInspectionDate("11111111");
+            report.setNumCritical(0);
+            report.setNumNonCritical(0);
         }
 
         //Image
@@ -64,53 +79,57 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         String name = res.getResName();
         holder.resName.setText(name);
 
-        /*
-            TODO
-            Get Data from Restaurant
-         */
+        //Location
+        String loca = res.getAddress() + ", " + res.getCity();
+        holder.resLoca.setText(loca);
 
+        // Issues
         int critIssue = report.getNumCritical();
         int nonCritIssue = report.getNumNonCritical();
 
         String issues = "Critical: " + critIssue + " Non-Critical: " + nonCritIssue;
-        String date = "";
-        /*
-            TODO
-            Get Inspection date from Restaurant
-         */
-        long inspectionDate = Calendar.getInstance().getTimeInMillis();
-        long currDate = Calendar.getInstance().getTimeInMillis();
-        // Days = Milliseconds / (Hours in Days * Minutes in Hour * Seconds in Minute * Seconds in Milliseconds)
-        float daysPast = (float)(currDate - inspectionDate) / (24 * 60 * 60 * 1000);
-        if(daysPast <= 30){
-            date = daysPast + " days since inspection";
+
+        String dateString = report.getInspectionDate();
+        int year = Integer.parseInt(dateString.substring(0,4));
+        int month = Integer.parseInt(dateString.substring(4,6));
+        int day = Integer.parseInt(dateString.substring(6,8));
+
+        Log.i("Dates", "Year: " + year + " Month: " + month + " Day: " + day);
+        LocalDate dateInspection = LocalDate.of(year, month, day);
+        LocalDate currDate = LocalDate.now();
+
+        long daysPast = ChronoUnit.DAYS.between(dateInspection, currDate);
+        Log.i("Days Past", "Days: " + daysPast);
+
+        String textViewDate;
+        if(year == 1111){
+            textViewDate = "No Inspections Yet";
+        }
+        else if(daysPast <= 30){
+            textViewDate = daysPast + " days since inspection";
         }
         else if(daysPast <= 365){
             //Month - Day
-            date = inspectionDate + "" + inspectionDate;
+            textViewDate = "Inspected on: " + getMonth(month) + " " + day;
         }
         else{
             //Month - Year
-            date = inspectionDate + "" + inspectionDate;
+            textViewDate = "Inspected on: " + getMonth(month) + " " + year;
         }
 
-        /*
-            TODO
-            Get Hazard Rating from Restaurant Data
-         */
         String hazardRating = report.getHazardRating().toUpperCase();
         switch(hazardRating){
             case "LOW": // Low
                 holder.resHazIcon.setImageResource(R.drawable.ic_checkmark);
-                holder.resIssueFound.setTextColor(Color.GREEN);
+                holder.resIssueFound.setTextColor(Color.parseColor("#4CBB17"));
                 break;
-            case "MEDIUM": // Medium
+            case "MODERATE": // Moderate
                 holder.resHazIcon.setImageResource(R.drawable.ic_warning);
-                holder.resIssueFound.setTextColor(Color.YELLOW);
+                holder.resIssueFound.setTextColor(Color.parseColor("#FF7800"));
                 break;
             default: // High
                 holder.resHazIcon.setImageResource(R.drawable.ic_biohazard);
-                holder.resIssueFound.setTextColor(Color.RED);
+                holder.resIssueFound.setTextColor(Color.parseColor("#E60000"));
                 break;
         }
 
@@ -118,7 +137,25 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         holder.resIssueFound.setText(issues);
 
         //Date
-        holder.resIssueDate.setText(date);
+        holder.resIssueDate.setText(textViewDate);
+    }
+
+    private String getMonth(int month){
+        switch(month){
+            case 1: return "Jan";
+            case 2: return "Feb";
+            case 3: return "Mar";
+            case 4: return "Apr";
+            case 5: return "May";
+            case 6: return "Jun";
+            case 7: return "Jul";
+            case 8: return "Aug";
+            case 9: return "Sept";
+            case 10: return "Oct";
+            case 11: return "Nov";
+            case 12: return "Dec";
+            default: return "No Inspection";
+        }
     }
 
     @Override
@@ -134,6 +171,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         public ImageView resImage;
         public ImageView resHazIcon;
         public TextView resName;
+        public TextView resLoca;
         public TextView resIssueFound;
         public TextView resIssueDate;
 
@@ -141,6 +179,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             super(itemView);
             resImage = itemView.findViewById(R.id.restaurantIcon);
             resName = itemView.findViewById(R.id.restaurantName);
+            resLoca = itemView.findViewById(R.id.restaurantLocation);
             resIssueFound = itemView.findViewById(R.id.restaurantIssueFound);
             resIssueDate = itemView.findViewById(R.id.restaurantIssueDate);
             resHazIcon = itemView.findViewById(R.id.restaurantHazardIcon);

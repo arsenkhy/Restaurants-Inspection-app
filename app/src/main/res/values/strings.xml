@@ -6,4 +6,5 @@
     <string name="restaurantIssueFound">Number of Issues Found</string>
     <string name="restaurantIssueDate">Date of Issue</string>
     <string name="restaurantHazardIconDesc">Description of Hazard Icon</string>
+    <string name="restaurantLocation">Location of Restaurant</string>
 </resources>
