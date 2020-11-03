@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ProjectIteration1</string>
+    <string name="app_name">Restaurant Detail</string>
 
     <string name="restaurantName">Name of Restaurant</string>
     <string name="restaurantIconDesc">Description of Restaurant Icon</string>
@@ -7,4 +7,5 @@
     <string name="restaurantIssueDate">Date of Issue</string>
     <string name="restaurantHazardIconDesc">Description of Hazard Icon</string>
     <string name="restaurantLocation">Location of Restaurant</string>
+    <string name="textview">TextView</string>
 </resources>

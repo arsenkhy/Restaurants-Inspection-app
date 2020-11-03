@@ -9,13 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.projectiteration1.MainActivity;
 import com.example.projectiteration1.R;
 import com.example.projectiteration1.adapter.RestaurantAdapter;
 import com.example.projectiteration1.model.*;
-import com.example.projectiteration1.restaurant_detail;
-
-import java.util.ArrayList;
 
 /**
  * UI Logic for listing all Restaurants in CardView via RecyclerView
