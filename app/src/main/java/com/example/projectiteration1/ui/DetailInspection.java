@@ -40,32 +40,36 @@ public class DetailInspection extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_inspection);
 
+        //retrieve the passed data
         Intent intent = getIntent();
-        //resIndex=intent.getIntExtra(Intent.EXTRA_INDEX, 0);
         resIndex=intent.getIntExtra(Intent.EXTRA_INDEX,0);
         inspectionIndex=intent.getIntExtra("Inspection index",0);
-
-
-
         restaurantsList=restaurantsList.getInstance();
         ins=restaurantsList.getRestaurants().get(resIndex).getInspectionReports().get(inspectionIndex);
 
 
+        //set up date
+        TextView date=findViewById(R.id.inspectionDate);
+        date.setText(restaurantsList.getRestaurants().get(resIndex).getInspectionReports().get(inspectionIndex).getInspectionDate());
 
-        TextView date=findViewById(R.id.date);
+        //set up inspectionType
         TextView inspectiontype=findViewById(R.id.inspectionType);
-        TextView c=findViewById(R.id.critical);
-        TextView nonCri=findViewById(R.id.nonCritical);
+        //String inspectionDate="Inspection Date is " +restaurantsList.getRestaurants().get(resIndex).getInspectionReports().get(inspectionIndex).getInspectionDate();
+        inspectiontype.setText(""+restaurantsList.getRestaurants().get(resIndex).getInspectionReports().get(inspectionIndex).getInspectionType());
+
+        //set up number of critical issues
+        TextView c=findViewById(R.id.numberofCritical);
+        String critical="Number of Critical Issues is "+ins.getNumCritical();
+        c.setText(""+critical);
+
+        //set up number of noncritical issues
+        TextView nonCri=findViewById(R.id.numberofNoncritical);
+        String noncritical="Number of Non-Critical Issues is "+ins.getNumNonCritical();
+        nonCri.setText(""+noncritical);
+
+       //set up hazard rating
         TextView hazardLevel=findViewById(R.id.hazardLevel);
         ImageView icon=findViewById(R.id.inspectionIcon);
-
-        //String inspectionDate="Inspection Date is " +restaurantsList.getRestaurants().get(resIndex).getInspectionReports().get(inspectionIndex).getInspectionDate();
-        //date.setText(restaurantsList.getRestaurants().get(resIndex).getInspectionReports().get(inspectionIndex).getInspectionDate());
-        inspectiontype.setText(""+restaurantsList.getRestaurants().get(resIndex).getInspectionReports().get(inspectionIndex).getInspectionType());
-        String critical="Number of Critical Issues is "+ins.getNumCritical();
-        //c.setText(""+critical);
-       /* nonCri.setText(ins.getNumNonCritical());
-        nonCri.setT*/
         hazardLevel.setText(""+ins.getHazardRating());
         if(ins.getHazardRating().equals("Low")) {
             icon.setImageResource(R.drawable.risk_low);
@@ -83,15 +87,6 @@ public class DetailInspection extends AppCompatActivity {
         populateViolationList();
         populateListView();
         registerClickCallBack();
-
-
-      /* TextView res=(TextView)findViewById(R.id.resIndex);
-       TextView ins=(TextView)findViewById(R.id.inspectionIndex);*/
-     /*  res.setText(""+resIndex);
-       ins.setText(""+inspectionIndex);*/
-
-
-
     }
 
     private void registerClickCallBack(){
@@ -109,16 +104,20 @@ public class DetailInspection extends AppCompatActivity {
 
     private void populateViolationList() {
         //ArrayList<Violation> list=new ArrayList<>();
+
+        //display all the violation under that inspection
         for(int i=0; i < ins.getViolations().size();i++){
+
             mylist.add(ins.getViolations().get(i));
         }
-
     }
+
     private void populateListView() {
         ArrayAdapter<Violation> adapter=new MyListAdapter();
         ListView list=(ListView)findViewById(R.id.violationListView);
         list.setAdapter(adapter);
     }
+
     private class MyListAdapter extends ArrayAdapter<Violation>{
 
         public MyListAdapter(){
@@ -130,9 +129,7 @@ public class DetailInspection extends AppCompatActivity {
             View itemView=convertView;
             if(itemView==null){
                 itemView=getLayoutInflater().inflate(R.layout.item_view,parent,false);
-
             }
-
             Violation currentVio=mylist.get(position);
 
             //Fill the text View
@@ -140,11 +137,11 @@ public class DetailInspection extends AppCompatActivity {
             severity.setText(currentVio.getSeriousness());
             TextView description=(TextView)itemView.findViewById(R.id.description);
             description.setText(currentVio.getDescription());
-           /* TextView appear=(TextView)itemView.findViewById(R.id.nature);
-            appear.setText(currentVio.getReappearance());*/
             ImageView icon=(ImageView) itemView.findViewById(R.id.severityIcon);
             ImageView food=(ImageView) itemView.findViewById(R.id.natureofViolation);
             food.setImageResource(R.drawable.food);
+
+            //set up the critical icon and text color
             if(currentVio.getSeriousness().equals("Critical")) {
                 icon.setImageResource(R.drawable.criticalsign);
                 severity.setTextColor(Color.parseColor("#E60000"));
@@ -153,12 +150,8 @@ public class DetailInspection extends AppCompatActivity {
                 icon.setImageResource(R.drawable.non_critical);
                 severity.setTextColor(Color.parseColor("#4CBB17"));
             }
-
             return itemView;
         }
-
-
-
     }
 
     public static Intent makeLaunchIntent(Context context, int index) {
@@ -166,6 +159,7 @@ public class DetailInspection extends AppCompatActivity {
         intent.putExtra(Intent.EXTRA_CHOOSER_TARGETS, index);
         return intent;
     }
+
     private void extractData(){
         Intent intent=getIntent();
         inspectionIndex=intent.getIntExtra(Intent.EXTRA_CHOOSER_TARGETS, 0);
