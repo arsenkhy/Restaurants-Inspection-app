@@ -20,6 +20,7 @@ import com.example.projectiteration1.R;
 import com.example.projectiteration1.model.InspectionReport;
 import com.example.projectiteration1.model.Restaurant;
 import com.example.projectiteration1.model.RestaurantsList;
+import com.example.projectiteration1.ui.DetailInspection;
 
 import org.w3c.dom.Text;
 
@@ -140,9 +141,9 @@ public class InspectionAdapter extends RecyclerView.Adapter<InspectionAdapter.My
         return list.size();
     }
 
-    /*public static Intent makeLaunchIntent(Context c, int index){
-        return new Intent(c, DetailInspection.class)
-    }*/
+    public static Intent makeLaunchIntent(Context c, int index) {
+        return new Intent(c, DetailInspection.class);
+    }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -161,10 +162,10 @@ public class InspectionAdapter extends RecyclerView.Adapter<InspectionAdapter.My
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    /*Intent intent = new Intent(context, DetailInspection.class);
-                    intent.putExtra("index", position);
-                    String chooseInspection = intent.getStringExtra("Inspection Date" + res.getInspectionReports().get(position).getInspectionDate());
-                    context.startActivity(intent);*/
+                    Intent intent = new Intent(context, DetailInspection.class);
+                    intent.putExtra(Intent.EXTRA_INDEX, position);
+                    //String chooseInspection = intent.getStringExtra("Inspection Date" + res.getInspectionReports().get(position).getInspectionDate());
+                    context.startActivity(intent);
                 }
             });
         }
