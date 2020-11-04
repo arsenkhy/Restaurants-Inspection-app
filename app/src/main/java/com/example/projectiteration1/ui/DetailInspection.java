@@ -127,8 +127,6 @@ public class DetailInspection extends AppCompatActivity {
             String s="";
             epy.setText(s);
         }
-
-
     }
 
     private void populateListView() {
