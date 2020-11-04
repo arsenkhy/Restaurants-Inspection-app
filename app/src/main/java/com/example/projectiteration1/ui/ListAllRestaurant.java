@@ -54,6 +54,8 @@ public class ListAllRestaurant extends AppCompatActivity {
             public void onResClick(int pos) {
                 Log.i("Main - Res Click", "@Pos: " + pos);
                 Intent i = RestaurantDetail.makeLaunchIntent(ListAllRestaurant.this, pos);
+           /*     Intent intent=new Intent(ListAllRestaurant.this,DetailInspection.class);
+                intent.putExtra("RES",pos);*/
                 startActivity(i);
             }
         });
