@@ -71,7 +71,7 @@ public class InspectionAdapter extends RecyclerView.Adapter<InspectionAdapter.My
         holder.critical.setText("Critical: " + list.get(position).getNumCritical());
 
         //non-critical issues
-
+        holder.nonCritical.setText("Non-Critical: " + list.get(position).getNumNonCritical());
 
         //date
         String dateString = list.get(position).getInspectionDate();

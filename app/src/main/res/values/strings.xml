@@ -14,7 +14,7 @@
     <string name="detailIconDesc">Small Image of Restaurant</string>
     <string name="detailBigIconDesc">Large Image of Restaurant</string>
     <string name="inspectionNonCrit">Number of Non Critical Issues</string>
-    <string name="inspectionCrit">Number of Non Critical Issues</string>
+    <string name="inspectionCrit">Number of Critical Issues</string>
     <string name="inspectionDate">Date of Inspection</string>
     <string name="inspectionHazardLevel">Hazard Level</string>
     <string name="riskImageDesc">Image of Risk Level</string>
