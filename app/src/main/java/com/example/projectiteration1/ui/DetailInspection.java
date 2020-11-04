@@ -50,6 +50,10 @@ public class DetailInspection extends AppCompatActivity {
         ins=restaurantsList.getRestaurants().get(resIndex).getInspectionReports().get(inspectionIndex);
 
 
+
+
+
+
         //set up date
         TextView date=findViewById(R.id.inspectionDate);
         date.setText(restaurantsList.getRestaurants().get(resIndex).getInspectionReports().get(inspectionIndex).getInspectionDate());
@@ -69,7 +73,7 @@ public class DetailInspection extends AppCompatActivity {
         String noncritical="Number of Non-Critical Issues is "+ins.getNumNonCritical();
         nonCri.setText(""+noncritical);
 
-       //set up hazard rating
+        //set up hazard rating
         TextView hazardLevel=findViewById(R.id.hazardLevel);
         ImageView icon=findViewById(R.id.inspectionIcon);
         hazardLevel.setText(""+ins.getHazardRating());
@@ -106,6 +110,12 @@ public class DetailInspection extends AppCompatActivity {
 
     private void populateViolationList() {
         //ArrayList<Violation> list=new ArrayList<>();
+        if(mylist.isEmpty()){
+            TextView epy=(TextView)findViewById(R.id.noViolation);
+            String s="There is no violations under this inspection";
+            epy.setText(s);
+            //return itemView;
+        }
 
         //display all the violation under that inspection
         for(int i=0; i < ins.getViolations().size();i++){
@@ -133,6 +143,7 @@ public class DetailInspection extends AppCompatActivity {
                 itemView=getLayoutInflater().inflate(R.layout.item_view,parent,false);
             }
             Violation currentVio=mylist.get(position);
+
 
             //Fill the text View
             TextView severity=(TextView)itemView.findViewById(R.id.severityText);
