@@ -20,6 +20,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+/**
+ * Class containing detailed issues of a specific restaurant
+ */
 public class RestaurantDetail extends AppCompatActivity {
 
     private RestaurantsList res_list;

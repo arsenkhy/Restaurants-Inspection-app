@@ -20,7 +20,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 /**
- * Adapter to fit data of the restaurant into a
+ * Adapter to fit data of the restaurant into a cardview displaying restaurant
  */
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder>{
     private RestaurantsList resList;

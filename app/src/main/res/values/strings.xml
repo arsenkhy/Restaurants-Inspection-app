@@ -17,4 +17,5 @@
     <string name="inspectionCrit">Number of Non Critical Issues</string>
     <string name="inspectionDate">Date of Inspection</string>
     <string name="inspectionHazardLevel">Hazard Level</string>
+    <string name="riskImageDesc">Image of Risk Level</string>
 </resources>
