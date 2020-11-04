@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -109,19 +110,25 @@ public class DetailInspection extends AppCompatActivity {
     }
 
     private void populateViolationList() {
+        //display all the violation under that inspection
+        for(int i=0; i < ins.getViolations().size();i++){
+            mylist.add(ins.getViolations().get(i));
+        }
+
         //ArrayList<Violation> list=new ArrayList<>();
+        Log.i("TETS", "Size: " + mylist.size());
         if(mylist.isEmpty()){
             TextView epy=(TextView)findViewById(R.id.noViolation);
             String s="There is no violations under this inspection";
             epy.setText(s);
-            //return itemView;
+        }
+        else{
+            TextView epy=(TextView)findViewById(R.id.noViolation);
+            String s="";
+            epy.setText(s);
         }
 
-        //display all the violation under that inspection
-        for(int i=0; i < ins.getViolations().size();i++){
 
-            mylist.add(ins.getViolations().get(i));
-        }
     }
 
     private void populateListView() {

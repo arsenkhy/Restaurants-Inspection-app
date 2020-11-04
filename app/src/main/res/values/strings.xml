@@ -19,4 +19,13 @@
     <string name="inspectionHazardLevel">Hazard Level</string>
     <string name="riskImageDesc">Image of Risk Level</string>
     <string name="menu_back">Back</string>
+    <string name="detailedInspectionDate">Date</string>
+    <string name="detailedInspectionType">Inspection Type</string>
+    <string name="detailedInspectionCrit">Number of Critical Issues</string>
+    <string name="detailedInspectionNonCrit">Number of Non-Critical Issues</string>
+    <string name="detailedInspectionHazard">Hazard Level</string>
+    <string name="detailedInspectionTitle">DETAIL OF INSPECTIONS</string>
+    <string name="detailedInspectionList">List of Violation</string>
+    <string name="detailedInspectionCheck">No Violations Yet</string>
+    <string name="detailedInspectionIcon">Icon for Inspection</string>
 </resources>
