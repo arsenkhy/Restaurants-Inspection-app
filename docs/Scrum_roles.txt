@@ -1,0 +1,6 @@
+Scrum roles:
+
+- Scrum Master: Colin Yuen - cya107
+- Product Owner: Arsen Nurshaikhy - anurshai
+- Repository Manager: Navjot Kaur - nka57
+- Team Member: Haosen Lin - hla211
