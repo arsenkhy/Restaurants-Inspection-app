@@ -29,12 +29,15 @@ import com.example.projectiteration1.model.Violation;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Listing all the violations of a specific inspection
+ */
 public class DetailInspection extends AppCompatActivity {
     RestaurantsList restaurantsList;
     int inspectionIndex;
     int resIndex;
     private InspectionReport ins;
-    ArrayList<Violation> mylist=new ArrayList<Violation>();
+    ArrayList<Violation> mylist=new ArrayList<>();
 
 
 
@@ -47,7 +50,7 @@ public class DetailInspection extends AppCompatActivity {
         Intent intent = getIntent();
         resIndex=intent.getIntExtra(Intent.EXTRA_INDEX,0);
         inspectionIndex=intent.getIntExtra("Inspection index",0);
-        restaurantsList=restaurantsList.getInstance();
+        restaurantsList= RestaurantsList.getInstance();
         ins=restaurantsList.getRestaurants().get(resIndex).getInspectionReports().get(inspectionIndex);
 
 
@@ -61,23 +64,23 @@ public class DetailInspection extends AppCompatActivity {
 
         //set up inspectionType
         TextView inspectiontype=findViewById(R.id.inspectionType);
-        //String inspectionDate="Inspection Date is " +restaurantsList.getRestaurants().get(resIndex).getInspectionReports().get(inspectionIndex).getInspectionDate();
-        inspectiontype.setText(""+restaurantsList.getRestaurants().get(resIndex).getInspectionReports().get(inspectionIndex).getInspectionType());
+        String inspectionDate= ""+restaurantsList.getRestaurants().get(resIndex).getInspectionReports().get(inspectionIndex).getInspectionType();
+        inspectiontype.setText(inspectionDate);
 
         //set up number of critical issues
         TextView c=findViewById(R.id.numberofCritical);
         String critical="Number of Critical Issues is "+ins.getNumCritical();
-        c.setText(""+critical);
+        c.setText(critical);
 
         //set up number of noncritical issues
         TextView nonCri=findViewById(R.id.numberofNoncritical);
         String noncritical="Number of Non-Critical Issues is "+ins.getNumNonCritical();
-        nonCri.setText(""+noncritical);
+        nonCri.setText(noncritical);
 
         //set up hazard rating
         TextView hazardLevel=findViewById(R.id.hazardLevel);
         ImageView icon=findViewById(R.id.inspectionIcon);
-        hazardLevel.setText(""+ins.getHazardRating());
+        hazardLevel.setText(ins.getHazardRating());
         if(ins.getHazardRating().equals("Low")) {
             icon.setImageResource(R.drawable.risk_low);
             hazardLevel.setTextColor(Color.parseColor("#4CBB17"));
@@ -97,7 +100,7 @@ public class DetailInspection extends AppCompatActivity {
     }
 
     private void registerClickCallBack(){
-        ListView list=(ListView)findViewById(R.id.violationListView);
+        ListView list=findViewById(R.id.violationListView);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -118,12 +121,12 @@ public class DetailInspection extends AppCompatActivity {
         //ArrayList<Violation> list=new ArrayList<>();
         Log.i("TETS", "Size: " + mylist.size());
         if(mylist.isEmpty()){
-            TextView epy=(TextView)findViewById(R.id.noViolation);
+            TextView epy=findViewById(R.id.noViolation);
             String s="There is no violations under this inspection";
             epy.setText(s);
         }
         else{
-            TextView epy=(TextView)findViewById(R.id.noViolation);
+            TextView epy=findViewById(R.id.noViolation);
             String s="";
             epy.setText(s);
         }
@@ -131,7 +134,7 @@ public class DetailInspection extends AppCompatActivity {
 
     private void populateListView() {
         ArrayAdapter<Violation> adapter=new MyListAdapter();
-        ListView list=(ListView)findViewById(R.id.violationListView);
+        ListView list=findViewById(R.id.violationListView);
         list.setAdapter(adapter);
     }
 
@@ -151,12 +154,12 @@ public class DetailInspection extends AppCompatActivity {
 
 
             //Fill the text View
-            TextView severity=(TextView)itemView.findViewById(R.id.severityText);
+            TextView severity=itemView.findViewById(R.id.severityText);
             severity.setText(currentVio.getSeriousness());
-            TextView description=(TextView)itemView.findViewById(R.id.description);
+            TextView description=itemView.findViewById(R.id.description);
             description.setText(currentVio.getDescription());
-            ImageView icon=(ImageView) itemView.findViewById(R.id.severityIcon);
-            ImageView food=(ImageView) itemView.findViewById(R.id.natureofViolation);
+            ImageView icon= itemView.findViewById(R.id.severityIcon);
+            ImageView food= itemView.findViewById(R.id.natureofViolation);
             food.setImageResource(R.drawable.food);
 
             //set up the critical icon and text color
