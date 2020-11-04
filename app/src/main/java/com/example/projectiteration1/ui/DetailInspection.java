@@ -60,7 +60,13 @@ public class DetailInspection extends AppCompatActivity {
 
         //set up date
         TextView date=findViewById(R.id.inspectionDate);
-        date.setText(restaurantsList.getRestaurants().get(resIndex).getInspectionReports().get(inspectionIndex).getInspectionDate());
+
+        String dateString = restaurantsList.getRestaurants().get(resIndex).getInspectionReports().get(inspectionIndex).getInspectionDate();
+        int year = Integer.parseInt(dateString.substring(0,4));
+        int month = Integer.parseInt(dateString.substring(4,6));
+        int day = Integer.parseInt(dateString.substring(6,8));
+        dateString = getMonth(month) + " " + day + ", " + year;
+        date.setText(dateString);
 
         //set up inspectionType
         TextView inspectiontype=findViewById(R.id.inspectionType);
@@ -184,6 +190,24 @@ public class DetailInspection extends AppCompatActivity {
     private void extractData(){
         Intent intent=getIntent();
         inspectionIndex=intent.getIntExtra(Intent.EXTRA_CHOOSER_TARGETS, 0);
+    }
+
+    private String getMonth(int month){
+        switch(month){
+            case 1: return "Jan";
+            case 2: return "Feb";
+            case 3: return "Mar";
+            case 4: return "Apr";
+            case 5: return "May";
+            case 6: return "Jun";
+            case 7: return "Jul";
+            case 8: return "Aug";
+            case 9: return "Sept";
+            case 10: return "Oct";
+            case 11: return "Nov";
+            case 12: return "Dec";
+            default: return "No Inspection";
+        }
     }
 
     @Override
