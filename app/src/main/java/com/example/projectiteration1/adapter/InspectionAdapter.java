@@ -27,7 +27,9 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
-//adapter class to display inspection
+/**
+ * Adapter to fit data of the restaurant's inspections
+ */
 public class InspectionAdapter extends RecyclerView.Adapter<InspectionAdapter.MyViewHolder> {
     RestaurantsList res_list = RestaurantsList.getInstance();
     Context context;

@@ -18,9 +18,12 @@ import com.example.projectiteration1.model.RestaurantsList;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
- * Adapter to fit data of the restaurant into a
+ * Adapter to fit data of the restaurant into a cardview displaying restaurant
  */
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder>{
     private RestaurantsList resList;
@@ -51,7 +54,14 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                 }
 
                 try{
-                    report = res.getInspectionReports().get(0);
+                    ArrayList<InspectionReport> allReports = res.getInspectionReports();
+                    Collections.sort(allReports, new Comparator<InspectionReport>() {
+                        @Override
+                        public int compare(InspectionReport o1, InspectionReport o2) {
+                            return o2.getInspectionDate().compareTo(o1.getInspectionDate());
+                        }
+                    });
+                    report = allReports.get(0);
                     Log.i("Listing - Report", "pos: " + position + " " + report.toString());
                 }catch(Exception e){
                     Log.e("Adapter - onBind", "Error trying to access Inspection");

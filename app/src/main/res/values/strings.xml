@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Restaurant Detail</string>
+    <string name="app_name">Restaurant Inspection Ratings</string>
 
     <string name="restaurantName">Name of Restaurant</string>
     <string name="restaurantIconDesc">Description of Restaurant Icon</string>
@@ -17,4 +17,6 @@
     <string name="inspectionCrit">Number of Non Critical Issues</string>
     <string name="inspectionDate">Date of Inspection</string>
     <string name="inspectionHazardLevel">Hazard Level</string>
+    <string name="riskImageDesc">Image of Risk Level</string>
+    <string name="menu_back">Back</string>
 </resources>

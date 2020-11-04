@@ -1,5 +1,6 @@
 package com.example.projectiteration1.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,6 +9,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.projectiteration1.R;
@@ -20,6 +23,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+/**
+ * Class containing detailed issues of a specific restaurant
+ */
 public class RestaurantDetail extends AppCompatActivity {
 
     private RestaurantsList res_list;
@@ -91,6 +97,23 @@ public class RestaurantDetail extends AppCompatActivity {
         InspectionAdapter adapter = new InspectionAdapter(this, report, index);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_restaurant_details, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId())
+        {
+            case R.id.menu_back:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }
