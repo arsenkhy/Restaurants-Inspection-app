@@ -1,0 +1,5 @@
+Scrum roles:
+    Repo Manager - Colin 
+    Scrum Master - Navjot
+    Product Owner - Jason
+    Team Member - Arsen

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.DetailInspection">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieAnimationView"
+        android:layout_width="66dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/checklist" />
+
+    <TextView
+        android:id="@+id/inspectionDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="36dp"
+        android:text="@string/detailedInspectionDate"
+        app:layout_constraintEnd_toStartOf="@+id/inspectionIcon"
+        app:layout_constraintTop_toTopOf="@+id/inspectionIcon" />
+
+    <TextView
+        android:id="@+id/inspectionType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/detailedInspectionType"
+        app:layout_constraintEnd_toEndOf="@+id/inspectionDate"
+        app:layout_constraintTop_toBottomOf="@+id/inspectionDate" />
+
+    <TextView
+        android:id="@+id/numberofCritical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:text="@string/detailedInspectionCrit"
+        app:layout_constraintEnd_toEndOf="@+id/inspectionType"
+        app:layout_constraintTop_toBottomOf="@+id/inspectionType" />
+
+    <TextView
+        android:id="@+id/numberofNoncritical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/detailedInspectionNonCrit"
+        app:layout_constraintEnd_toEndOf="@+id/numberofCritical"
+        app:layout_constraintTop_toBottomOf="@+id/numberofCritical" />
+
+    <ImageView
+        android:id="@+id/inspectionIcon"
+        android:layout_width="121dp"
+        android:layout_height="121dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="28dp"
+        android:contentDescription="@string/detailedInspectionIcon"
+        android:maxWidth="60dp"
+        android:maxHeight="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView1"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/hazardLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/detailedInspectionHazard"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="@+id/inspectionIcon"
+        app:layout_constraintStart_toStartOf="@+id/inspectionIcon"
+        app:layout_constraintTop_toBottomOf="@+id/inspectionIcon" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/detailedInspectionTitle"
+        android:textSize="24sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.175"
+        app:layout_constraintStart_toEndOf="@+id/lottieAnimationView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/violationListView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/noViolation" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/detailedInspectionList"
+        android:textSize="20sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hazardLevel" />
+
+    <TextView
+        android:id="@+id/noViolation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/detailedInspectionCheck"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/noci"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-1"
+        app:layout_constraintEnd_toEndOf="@+id/inspectionType"
+        app:layout_constraintTop_toTopOf="@+id/numberofCritical" />
+
+    <TextView
+        android:id="@+id/nonci"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-1"
+        app:layout_constraintEnd_toEndOf="@+id/noci"
+        app:layout_constraintTop_toTopOf="@+id/numberofNoncritical" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
