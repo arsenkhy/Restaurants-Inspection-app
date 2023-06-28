@@ -3,11 +3,14 @@ The project is an Android mobile app developed by a team of four students using 
 
 The primary goal of the app is to empower users with accurate and timely information about the inspections conducted at various restaurants in Vancouver. By leveraging the Vancouver restaurants' inspections API server, the app fetches the latest inspection reports and presents them in an intuitive and user-friendly manner.
 
-<img src="mapPNG.PNG" alt="Alt Text" width="250" height="400">
-<img src="ListView.PNG" alt="Alt Text" width="250" height="400">
-<img src="ResDatail.PNG" alt="Alt Text" width="250" height="400">
-<img src="DownloadPopUp.PNG" alt="Alt Text" width="250" height="400">
-<img src="Wait.PNG" alt="Alt Text" width="250" height="400">
+<div style="display:flex;">
+  <img src="mapPNG.PNG" alt="Alt Text" width="250" height="400">
+  <img src="ListView.PNG" alt="Alt Text" width="250" height="400">
+  <img src="ResDatail.PNG" alt="Alt Text" width="250" height="400">
+  <img src="DownloadPopUp.PNG" alt="Alt Text" width="250" height="400">
+  <img src="w   ait.PNG" alt="Alt Text" width="250" height="400">
+</div>
+
 <hr/>
 
 ## Role and responsibilities
