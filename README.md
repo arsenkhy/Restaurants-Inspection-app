@@ -8,7 +8,7 @@ The primary goal of the app is to empower users with accurate and timely informa
   <img src="ListView.PNG" alt="Alt Text" width="250" height="400">
   <img src="ResDatail.PNG" alt="Alt Text" width="250" height="400">
   <img src="DownloadPopUp.PNG" alt="Alt Text" width="250" height="400">
-  <img src="w   ait.PNG" alt="Alt Text" width="250" height="400">
+  <img src="wait.PNG" alt="Alt Text" width="250" height="400">
 </div>
 
 <hr/>
